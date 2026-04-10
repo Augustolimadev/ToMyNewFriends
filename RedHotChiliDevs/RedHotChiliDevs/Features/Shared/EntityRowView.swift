@@ -11,11 +11,13 @@ import SwiftUI
 struct EntityRowView: View {
 
     let name: String
-    let subtitle: String
+    let subtitle: String?
     let imageURL: URL?
 
     var body: some View {
+        
         HStack(spacing: 14) {
+            
             AsyncEntityImage(url: imageURL, cornerRadius: 10)
                 .frame(width: 60, height: 60)
 
@@ -24,9 +26,11 @@ struct EntityRowView: View {
                     .font(.headline)
                     .foregroundStyle(.primary)
 
-                Text(subtitle)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                if let subtitle {
+                    Text(subtitle)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
             }
 
             Spacer()

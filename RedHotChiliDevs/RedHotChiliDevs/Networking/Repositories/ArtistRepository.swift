@@ -12,15 +12,10 @@ final class ArtistRepository: ArtistRepositoryProtocol {
     private let networkService: NetworkServiceProtocol
     private let cacheService: CacheServiceProtocol
 
-    // MARK: - Cache Keys
+    // MARK: - Cache Key
     private let artistsKey = "artists_all"
-    private func artistKey(_ id: Int) -> String { "artist_\(id)" }
-    private func performancesKey(_ id: Int, from: Date?, to: Date?) -> String {
-        "artist_perf_\(id)_\(from?.timeIntervalSince1970 ?? 0)_\(to?.timeIntervalSince1970 ?? 0)"
-    }
 
     // MARK: - Init
-
     init(networkService: NetworkServiceProtocol, cacheService: CacheServiceProtocol) {
         self.networkService = networkService
         self.cacheService = cacheService

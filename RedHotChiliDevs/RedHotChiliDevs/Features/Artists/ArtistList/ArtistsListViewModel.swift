@@ -42,8 +42,6 @@ final class ArtistsListViewModel {
         } catch {
             errorMessage = error.localizedDescription
         }
-
-//        isLoading = false
     }
 }
 

@@ -17,6 +17,7 @@ struct RedHotChiliDevsApp: App {
         WindowGroup {
             MainTabView()
                 .environment(\.artistRepository, container.artistRepository)
+                .environment(\.venueRepository, container.venueRepository)
         }
     }
 }
