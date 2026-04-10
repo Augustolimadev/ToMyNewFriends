@@ -19,11 +19,11 @@ enum NetworkError: LocalizedError, Equatable {
     var errorDescription: String? {
         
         switch self {
-        case .invalidURL:              "The URL is invalid."
-        case .invalidResponse:         "The server returned an invalid response."
-        case .statusCode(let code):    "Server error with status code \(code)."
-        case .decodingError(let msg):  "Failed to decode response: \(msg)"
-        case .noData:                  "No data was returned."
+        case .invalidURL:              Strings.Error.Network.invalidURL
+        case .invalidResponse:         Strings.Error.Network.invalidResponse
+        case .statusCode(let code):    Strings.Error.Network.statusCode(code)
+        case .decodingError(let msg):  Strings.Error.Network.decodingError(msg)
+        case .noData:                  Strings.Error.Network.noData
         case .unknown(let msg):        msg
         }
     }

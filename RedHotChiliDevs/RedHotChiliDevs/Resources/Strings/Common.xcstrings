@@ -1,0 +1,18 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "common.retry" : {
+      "localizations" : {
+        "en"    : { "stringUnit" : { "state" : "translated", "value" : "Retry" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Tentar Novamente" } }
+      }
+    },
+    "common.failed_to_load" : {
+      "localizations" : {
+        "en"    : { "stringUnit" : { "state" : "translated", "value" : "Failed to Load" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Falha ao Carregar" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

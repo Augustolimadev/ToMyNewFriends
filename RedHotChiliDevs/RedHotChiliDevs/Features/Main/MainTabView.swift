@@ -13,12 +13,12 @@ struct MainTabView: View {
         TabView {
             ArtistsListView()
                 .tabItem {
-                    Label("Artists", systemImage: "music.microphone")
+                    Label(Strings.Artists.tabTitle, systemImage: "music.microphone")
                 }
-
+            
             VenuesListView()
                 .tabItem {
-                    Label("Venues", systemImage: "building.2")
+                    Label(Strings.Venues.tabTitle, systemImage: "building.2")
                 }
         }
     }
