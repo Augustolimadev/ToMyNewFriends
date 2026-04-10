@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct RedHotChiliDevsApp: App {
+    
+    /// `NetworkService` and `CacheService` instance.
+    private let container = AppContainer()
+    
     var body: some Scene {
         WindowGroup {
             MainTabView()
+                .environment(\.artistRepository, container.artistRepository)
         }
     }
 }

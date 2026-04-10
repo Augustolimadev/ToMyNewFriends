@@ -18,6 +18,6 @@ struct Venue: Identifiable, Codable, Hashable, Sendable {
         guard let encoded = name.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             return nil
         }
-        return URL(string: "https://myimagesstorage.amazonaws.com/venues/\(encoded).png")
+        return URL(string: "https://songleap.s3.amazonaws.com/venues/\(encoded).png")
     }
 }
