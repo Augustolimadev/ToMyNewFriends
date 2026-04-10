@@ -34,7 +34,6 @@ final class ArtistsListViewModel {
         isLoading = true
         defer { isLoading = false }
         
-        
         errorMessage = nil
 
         do {
