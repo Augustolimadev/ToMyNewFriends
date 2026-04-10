@@ -11,7 +11,7 @@ import SwiftUI
 struct RedHotChiliDevsApp: App {
     var body: some Scene {
         WindowGroup {
-            
+            MainTabView()
         }
     }
 }
