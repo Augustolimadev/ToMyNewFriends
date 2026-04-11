@@ -13,6 +13,7 @@ struct ArtistsListView: View {
     @State private var viewModel: ArtistsListViewModel?
 
     var body: some View {
+        
         NavigationStack {
             content
                 .navigationTitle(Strings.Artists.navTitle)
@@ -25,7 +26,6 @@ struct ArtistsListView: View {
     }
 
     // MARK: - Content
-
     @ViewBuilder
     private var content: some View {
         
@@ -44,6 +44,7 @@ struct ArtistsListView: View {
     }
 
     private func artistList(viewModel: ArtistsListViewModel) -> some View {
+        
         List(viewModel.artists) { artist in
             NavigationLink(value: artist) {
                 EntityRowView(
@@ -53,9 +54,9 @@ struct ArtistsListView: View {
                 )
             }
         }
-//        .navigationDestination(for: Artist.self) { artist in
-//            ArtistDetailView(artist: artist)
-//        }
+        .navigationDestination(for: Artist.self) { artist in
+            ArtistDetailView(artist: artist)
+        }
         .refreshable {
             await viewModel.loadArtists()
         }

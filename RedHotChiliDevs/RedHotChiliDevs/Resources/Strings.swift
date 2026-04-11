@@ -86,4 +86,20 @@ enum Strings {
             String(localized: "venues.loading", table: "Venues")
         }
     }
+    
+    // MARK: - Performances  →  Resources/Strings/Performances.xcstrings
+    enum Performances {
+        static var sectionTitle: String {
+            String(localized: "performances.section_title", table: "Performances")
+        }
+        static var loading: String {
+            String(localized: "performances.loading", table: "Performances")
+        }
+        static var empty: String {
+            String(localized: "performances.empty_title", table: "Performances")
+        }
+        static var emptyDescription: String {
+            String(localized: "performances.empty_description", table: "Performances")
+        }
+    }
 }
