@@ -1,13 +1,19 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "venues.loading" : {
+    "venues.tab_title" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Loading venues…"
+            "value" : "Venues"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locais"
           }
         }
       }
@@ -20,16 +26,28 @@
             "state" : "translated",
             "value" : "Venues"
           }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locais"
+          }
         }
       }
     },
-    "venues.tab_title" : {
+    "venues.loading" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Venues"
+            "value" : "Loading venues..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregando locais..."
           }
         }
       }

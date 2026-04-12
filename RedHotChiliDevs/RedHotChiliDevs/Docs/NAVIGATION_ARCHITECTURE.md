@@ -134,64 +134,6 @@ extension NavigationRouter {
 }
 ```
 
-## 🚀 Future Enhancements
-
-### 1. **Tab Persistence**
-Save and restore navigation state per tab:
-
-```swift
-@Observable
-final class TabRouter {
-    var artistsRouter = NavigationRouter()
-    var venuesRouter = NavigationRouter()
-    
-    func saveState() { /* persist paths */ }
-    func restoreState() { /* restore paths */ }
-}
-```
-
-### 2. **Conditional Navigation**
-```swift
-func navigateToArtist(_ artist: Artist) {
-    guard userHasAccess else {
-        navigate(to: .login)
-        return
-    }
-    navigate(to: .artistDetail(artist))
-}
-```
-
-### 3. **Navigation Interceptors**
-```swift
-func navigate(to route: Route) {
-    for interceptor in interceptors {
-        if !interceptor.shouldNavigate(to: route) {
-            return
-        }
-    }
-    path.append(route)
-}
-```
-
-## 📱 Current Structure
-
-```
-MainTabView
-├── NavigableView (Artists Tab)
-│   ├── ArtistsListView
-│   └── .withAppNavigationDestinations()
-│       ├── .artistDetail → ArtistDetailView
-│       └── .venueDetail → VenueDetailView
-│
-└── NavigableView (Venues Tab)
-    ├── VenuesListView
-    └── .withAppNavigationDestinations()
-        ├── .artistDetail → ArtistDetailView
-        └── .venueDetail → VenueDetailView
-```
-
-Each tab has its own independent navigation stack!
-
 ## 🎓 Best Practices
 
 1. ✅ **Always use the router** for navigation

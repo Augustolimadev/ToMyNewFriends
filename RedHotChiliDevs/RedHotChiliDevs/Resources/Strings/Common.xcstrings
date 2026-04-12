@@ -2,15 +2,71 @@
   "sourceLanguage" : "en",
   "strings" : {
     "common.retry" : {
+      "extractionState" : "manual",
       "localizations" : {
-        "en"    : { "stringUnit" : { "state" : "translated", "value" : "Retry" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Tentar Novamente" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tentar Novamente"
+          }
+        }
       }
     },
     "common.failed_to_load" : {
+      "extractionState" : "manual",
       "localizations" : {
-        "en"    : { "stringUnit" : { "state" : "translated", "value" : "Failed to Load" } },
-        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Falha ao Carregar" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to Load"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Falha ao Carregar"
+          }
+        }
+      }
+    },
+    "common.loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregando..."
+          }
+        }
+      }
+    },
+    "common.error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro"
+          }
+        }
       }
     }
   },

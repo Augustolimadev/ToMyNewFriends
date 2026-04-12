@@ -38,6 +38,12 @@ enum Strings {
         static var failedToLoad: String {
             String(localized: "common.failed_to_load", table: "Common")
         }
+        static var loading: String {
+            String(localized: "common.loading", table: "Common")
+        }
+        static var error: String {
+            String(localized: "common.error", table: "Common")
+        }
     }
     
     // MARK: - Network Errors  →  Resources/Strings/NetworkErrors.xcstrings

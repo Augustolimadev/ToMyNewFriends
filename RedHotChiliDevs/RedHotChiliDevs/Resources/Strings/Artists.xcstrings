@@ -1,40 +1,30 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "artists.loading" : {
+    "artists.tab_title" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Loading artists…"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chargement des artistes…"
+            "value" : "Artists"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Carregando artistas…"
+            "value" : "Artistas"
           }
         }
       }
     },
     "artists.nav_title" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Artists"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Artistes"
           }
         },
         "pt-BR" : {
@@ -45,24 +35,19 @@
         }
       }
     },
-    "artists.tab_title" : {
+    "artists.loading" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Artists"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Artistes"
+            "value" : "Loading artists..."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Artistas"
+            "value" : "Carregando artistas..."
           }
         }
       }

@@ -1,112 +1,87 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "error.network.decoding_error %@" : {
+    "error.network.invalid_url" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to decode response: %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Échec décodage de la réponse: %@"
+            "value" : "Invalid URL. Please check your connection and try again."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Falha ao decodificar a resposta: %@"
+            "value" : "URL inválida. Verifique sua conexão e tente novamente."
           }
         }
       }
     },
     "error.network.invalid_response" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The server returned an invalid response."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le serveur a renvoyé une réponse invalide."
+            "value" : "Invalid server response. Please try again later."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O servidor retornou uma resposta inválida."
-          }
-        }
-      }
-    },
-    "error.network.invalid_url" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The URL is invalid."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "URL invalide."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A URL é inválida."
-          }
-        }
-      }
-    },
-    "error.network.no_data" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No data was returned."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aucune donnée n'a été renvoyée."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nenhum dado foi retornado."
+            "value" : "Resposta inválida do servidor. Tente novamente mais tarde."
           }
         }
       }
     },
     "error.network.status_code %lld" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Server error with status code %lld."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erreur de serveur avec code de statut %lld"
+            "value" : "Server error (code %lld). Please try again later."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erro do servidor com código %lld."
+            "value" : "Erro do servidor (código %lld). Tente novamente mais tarde."
+          }
+        }
+      }
+    },
+    "error.network.decoding_error %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data format error: %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro no formato dos dados: %@"
+          }
+        }
+      }
+    },
+    "error.network.no_data" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No data received from server."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nenhum dado recebido do servidor."
           }
         }
       }
