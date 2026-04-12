@@ -54,9 +54,9 @@ struct VenuesListView: View {
                 )
             }
         }
-//        .navigationDestination(for: Venue.self) { venue in
-//            VenueDetailView(venue: venue)
-//        }
+        .navigationDestination(for: Venue.self) { venue in
+            VenueDetailView(venue: venue)
+        }
         .refreshable {
             await viewModel.loadVenues()
         }

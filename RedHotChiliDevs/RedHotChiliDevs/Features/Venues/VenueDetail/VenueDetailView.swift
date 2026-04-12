@@ -1,25 +1,25 @@
 //
-//  ArtistDetailView.swift
+//  VenueDetailView.swift
 //  RedHotChiliDevs
 //
-//  Created by Augusto Lima on 10/4/2026.
+//  Created by Augusto Lima on 11/4/2026.
 //
 
 import SwiftUI
 
-struct ArtistDetailView: View {
+struct VenueDetailView: View {
 
-    @Environment(\.artistRepository) private var repository
-    @State private var viewModel: ArtistDetailViewModel?
+    @Environment(\.venueRepository) private var repository
+    @State private var viewModel: VenueDetailViewModel?
 
-    let artist: Artist
+    let venue: Venue
 
     var body: some View {
         content
-            .navigationTitle(artist.name)
+            .navigationTitle(venue.name)
             .navigationBarTitleDisplayMode(.large)
             .task {
-                let vm = ArtistDetailViewModel(artist: artist, repository: repository)
+                let vm = VenueDetailViewModel(venue: venue, repository: repository)
                 viewModel = vm
                 await vm.loadPerformances()
             }
@@ -43,18 +43,13 @@ struct ArtistDetailView: View {
         }
     }
 
-    private func detailContent(viewModel: ArtistDetailViewModel) -> some View {
+    private func detailContent(viewModel: VenueDetailViewModel) -> some View {
         
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                EntityHeaderView(imageURL: artist.imageURL)
+                EntityHeaderView(imageURL: venue.imageURL)
 
-                Label(artist.genre, systemImage: "music.note")
-                    .font(.subheadline)
-                    .foregroundStyle(.primary)
-                    .padding(.horizontal)
-                
-                ArtistPerformancesListView(performances: viewModel.performances)
+                VenuePerformancesListView(performances: viewModel.performances)
             }
             .padding(.bottom)
         }
@@ -63,7 +58,7 @@ struct ArtistDetailView: View {
         }
     }
 
-    private func errorView(message: String, viewModel: ArtistDetailViewModel) -> some View {
+    private func errorView(message: String, viewModel: VenueDetailViewModel) -> some View {
         ErrorStateView(message: message) {
             await viewModel.loadPerformances()
         }
@@ -72,6 +67,10 @@ struct ArtistDetailView: View {
 
 #Preview {
     NavigationStack {
-        ArtistDetailView(artist: Artist(id: 7, name: "Beat Illuminati", genre: "Dance"))
+        VenueDetailView(venue: Venue(
+            id: 3,
+            name: "Cobblequill Colosseum",
+            sortId: 1)
+        )
     }
 }

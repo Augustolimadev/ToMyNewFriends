@@ -40,7 +40,7 @@ extension ArtistPerformance: Codable {
 /// Performance with embedded Artist — returned from /venues/{id}/performances
 struct VenuePerformance: Identifiable, Hashable, Sendable {
     let id: Int
-    let dateTime: Date
+    let date: Date
     let artist: Artist
 }
 
@@ -51,18 +51,18 @@ extension VenuePerformance: Codable {
     nonisolated init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(Int.self, forKey: .id)
-        self.dateTime = try container.decodeAPIDate(forKey: .dateTime)
+        self.date = try container.decodeAPIDate(forKey: .date)
         self.artist = try container.decode(Artist.self, forKey: .artist)
     }
     
     nonisolated func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
-        try container.encodeAPIDate(dateTime, forKey: .dateTime)
+        try container.encodeAPIDate(date, forKey: .date)
         try container.encode(artist, forKey: .artist)
     }
     
     private enum CodingKeys: String, CodingKey {
-        case id, dateTime, artist
+        case id, date, artist
     }
 }

@@ -46,7 +46,7 @@ final class VenueRepository: VenueRepositoryProtocol {
             [VenuePerformance].self,
             from: .venuePerformances(id: venueId, from: from, to: to)
         )
-        let sorted = performances.sorted { $0.dateTime < $1.dateTime }
+        let sorted = performances.sorted { $0.date < $1.date }
         cacheService.set(sorted, forKey: key)
         return sorted
     }
