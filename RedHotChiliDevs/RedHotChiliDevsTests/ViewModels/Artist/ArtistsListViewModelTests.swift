@@ -27,13 +27,13 @@ final class ArtistsListViewModelTests: XCTestCase {
         mock.responses["/artists"] = makeArtists()
 
         let repo = ArtistRepository(networkService: mock, cacheService: MockCacheService())
-        let model  = ArtistsListViewModel(repository: repo)
+        let viewModel  = ArtistsListViewModel(repository: repo)
 
-        await model.loadArtists()
+        await viewModel.loadArtists()
 
-        XCTAssertEqual(model.artists.count, 3)
-        XCTAssertNil(model.errorMessage)
-        XCTAssertFalse(model.isLoading)
+        XCTAssertEqual(viewModel.artists.count, 3)
+        XCTAssertNil(viewModel.errorMessage)
+        XCTAssertFalse(viewModel.isLoading)
     }
 
     func testLoadArtistsSortedAlphabetically() async {
@@ -42,11 +42,11 @@ final class ArtistsListViewModelTests: XCTestCase {
         mock.responses["/artists"] = makeArtists()
 
         let repo = ArtistRepository(networkService: mock, cacheService: MockCacheService())
-        let model  = ArtistsListViewModel(repository: repo)
+        let viewModel  = ArtistsListViewModel(repository: repo)
 
-        await model.loadArtists()
+        await viewModel.loadArtists()
 
-        XCTAssertEqual(model.artists.map(\.name), [
+        XCTAssertEqual(viewModel.artists.map(\.name), [
             "Beat Illuminati",
             "Diva Moon Rescue",
             "High Noon Saloon"
@@ -59,13 +59,13 @@ final class ArtistsListViewModelTests: XCTestCase {
         mock.errorToThrow = .statusCode(500)
 
         let repo = ArtistRepository(networkService: mock, cacheService: MockCacheService())
-        let model  = ArtistsListViewModel(repository: repo)
+        let viewModel  = ArtistsListViewModel(repository: repo)
 
-        await model.loadArtists()
+        await viewModel.loadArtists()
 
-        XCTAssertTrue(model.artists.isEmpty)
-        XCTAssertNotNil(model.errorMessage)
-        XCTAssertFalse(model.isLoading)
+        XCTAssertTrue(viewModel.artists.isEmpty)
+        XCTAssertNotNil(viewModel.errorMessage)
+        XCTAssertFalse(viewModel.isLoading)
     }
 
     func testLoadArtistsReturnsCachedData() async {
@@ -75,10 +75,10 @@ final class ArtistsListViewModelTests: XCTestCase {
         mock.responses["/artists"] = makeArtists()
 
         let repo = ArtistRepository(networkService: mock, cacheService: cache)
-        let model  = ArtistsListViewModel(repository: repo)
+        let viewModel  = ArtistsListViewModel(repository: repo)
 
-        await model.loadArtists()
-        await model.loadArtists() // second call — should hit cache
+        await viewModel.loadArtists()
+        await viewModel.loadArtists() // second call — should hit cache
 
         // Network should only have been called once
         XCTAssertEqual(mock.requestedEndpoints.filter { $0 == "/artists" }.count, 1)
@@ -90,10 +90,10 @@ final class ArtistsListViewModelTests: XCTestCase {
         mock.responses["/artists"] = makeArtists()
 
         let repo = ArtistRepository(networkService: mock, cacheService: MockCacheService())
-        let model  = ArtistsListViewModel(repository: repo)
+        let viewModel  = ArtistsListViewModel(repository: repo)
 
-        XCTAssertFalse(model.isLoading)
-        await model.loadArtists()
-        XCTAssertFalse(model.isLoading)
+        XCTAssertFalse(viewModel.isLoading)
+        await viewModel.loadArtists()
+        XCTAssertFalse(viewModel.isLoading)
     }
 }

@@ -26,13 +26,13 @@ final class VenuesListViewModelTests: XCTestCase {
         mock.responses["/venues"] = makeVenues()
 
         let repo = VenueRepository(networkService: mock, cacheService: MockCacheService())
-        let model  = VenuesListViewModel(repository: repo)
+        let viewModel  = VenuesListViewModel(repository: repo)
 
-        await model.loadVenues()
+        await viewModel.loadVenues()
 
-        XCTAssertEqual(model.venues.count, 3)
-        XCTAssertNil(model.errorMessage)
-        XCTAssertFalse(model.isLoading)
+        XCTAssertEqual(viewModel.venues.count, 3)
+        XCTAssertNil(viewModel.errorMessage)
+        XCTAssertFalse(viewModel.isLoading)
     }
 
     func testLoadVenuesSortedBySortId() async {
@@ -48,11 +48,11 @@ final class VenuesListViewModelTests: XCTestCase {
         mock.responses["/venues"] = unsorted
 
         let repo = VenueRepository(networkService: mock, cacheService: MockCacheService())
-        let model  = VenuesListViewModel(repository: repo)
+        let viewModel  = VenuesListViewModel(repository: repo)
 
-        await model.loadVenues()
+        await viewModel.loadVenues()
 
-        XCTAssertEqual(model.venues.map(\.sortId), [1, 2, 3])
+        XCTAssertEqual(viewModel.venues.map(\.sortId), [1, 2, 3])
     }
 
     func testLoadVenuesNetworkFailureSetsErrorMessage() async {
@@ -61,13 +61,13 @@ final class VenuesListViewModelTests: XCTestCase {
         mock.errorToThrow = .invalidURL
 
         let repo = VenueRepository(networkService: mock, cacheService: MockCacheService())
-        let model  = VenuesListViewModel(repository: repo)
+        let viewModel  = VenuesListViewModel(repository: repo)
 
-        await model.loadVenues()
+        await viewModel.loadVenues()
 
-        XCTAssertTrue(model.venues.isEmpty)
-        XCTAssertNotNil(model.errorMessage)
-        XCTAssertFalse(model.isLoading)
+        XCTAssertTrue(viewModel.venues.isEmpty)
+        XCTAssertNotNil(viewModel.errorMessage)
+        XCTAssertFalse(viewModel.isLoading)
     }
 
     func testLoadVenuesCachingCallsNetworkOnce() async {
@@ -77,10 +77,10 @@ final class VenuesListViewModelTests: XCTestCase {
         mock.responses["/venues"] = makeVenues()
 
         let repo = VenueRepository(networkService: mock, cacheService: cache)
-        let model  = VenuesListViewModel(repository: repo)
+        let viewModel  = VenuesListViewModel(repository: repo)
 
-        await model.loadVenues()
-        await model.loadVenues()
+        await viewModel.loadVenues()
+        await viewModel.loadVenues()
 
         XCTAssertEqual(mock.requestedEndpoints.filter { $0 == "/venues" }.count, 1)
     }
