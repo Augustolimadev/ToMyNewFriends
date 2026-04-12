@@ -10,19 +10,17 @@ import SwiftUI
 struct VenuesListView: View {
 
     @Environment(\.venueRepository) private var repository
+    @Environment(\.navigationRouter) private var router
     @State private var viewModel: VenuesListViewModel?
 
     var body: some View {
-        
-        NavigationStack {
-            content
-                .navigationTitle(Strings.Venues.navTitle)
-        }
-        .task {
-            let vm = VenuesListViewModel(repository: repository)
-            viewModel = vm
-            await vm.loadVenues()
-        }
+        content
+            .navigationTitle(Strings.Venues.navTitle)
+            .task {
+                let vm = VenuesListViewModel(repository: repository)
+                viewModel = vm
+                await vm.loadVenues()
+            }
     }
 
     // MARK: - Content
@@ -46,16 +44,17 @@ struct VenuesListView: View {
     private func venueList(viewModel: VenuesListViewModel) -> some View {
         
         List(viewModel.venues) { venue in
-            NavigationLink(value: venue) {
+            Button {
+                router.navigate(to: .venueDetail(venue))
+            } label: {
                 EntityRowView(
                     name: venue.name,
                     subtitle: nil,
                     imageURL: venue.imageURL
                 )
+                .contentShape(Rectangle())
             }
-        }
-        .navigationDestination(for: Venue.self) { venue in
-            VenueDetailView(venue: venue)
+            .buttonStyle(.plain)
         }
         .refreshable {
             await viewModel.loadVenues()
@@ -78,5 +77,7 @@ struct VenuesListView: View {
 }
 
 #Preview {
-    VenuesListView()
+    NavigableView {
+        VenuesListView()
+    }
 }

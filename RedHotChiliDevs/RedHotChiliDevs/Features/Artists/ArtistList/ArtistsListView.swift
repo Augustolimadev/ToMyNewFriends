@@ -10,19 +10,17 @@ import SwiftUI
 struct ArtistsListView: View {
 
     @Environment(\.artistRepository) private var repository
+    @Environment(\.navigationRouter) private var router
     @State private var viewModel: ArtistsListViewModel?
 
     var body: some View {
-        
-        NavigationStack {
-            content
-                .navigationTitle(Strings.Artists.navTitle)
-        }
-        .task {
-            let vm = ArtistsListViewModel(repository: repository)
-            viewModel = vm
-            await vm.loadArtists()
-        }
+        content
+            .navigationTitle(Strings.Artists.navTitle)
+            .task {
+                let vm = ArtistsListViewModel(repository: repository)
+                viewModel = vm
+                await vm.loadArtists()
+            }
     }
 
     // MARK: - Content
@@ -46,16 +44,17 @@ struct ArtistsListView: View {
     private func artistList(viewModel: ArtistsListViewModel) -> some View {
         
         List(viewModel.artists) { artist in
-            NavigationLink(value: artist) {
+            Button {
+                router.navigate(to: .artistDetail(artist))
+            } label: {
                 EntityRowView(
                     name: artist.name,
                     subtitle: artist.genre,
                     imageURL: artist.imageURL
                 )
+                .contentShape(Rectangle())
             }
-        }
-        .navigationDestination(for: Artist.self) { artist in
-            ArtistDetailView(artist: artist)
+            .buttonStyle(.plain)
         }
         .refreshable {
             await viewModel.loadArtists()
@@ -78,5 +77,7 @@ struct ArtistsListView: View {
 }
 
 #Preview {
-    ArtistsListView()
+    NavigableView {
+        ArtistsListView()
+    }
 }
