@@ -167,20 +167,23 @@ RedHotChiliDevs/
 │   └── ErrorStateView.swift
 │
 └── Tests/
+    ├── Images/
+    │   ├── ImageCacheTests.swift
+    │   └── ImageLoaderTests.swift
+    │   
     ├── Networking/
     │   ├── APIEndpointTests.swift
     │   └── CacheServiceTests.swift
     │   
-    ├── ViewModels/
-    │   ├── Artist/
-    │   │   ├── ArtistDetailViewModelTests.swift
-    │   │   └── ArtistsListViewModelTests.swift
-    │   │   
-    │   └── Venue/
-    │       ├── VenueDetailViewModelTests.swift
-    │       └── VenuesListViewModelTests.swift
-    │       
-    └── ImageCacheTests       
+    └── ViewModels/
+        ├── Artist/
+        │   ├── ArtistDetailViewModelTests.swift
+        │   └── ArtistsListViewModelTests.swift
+        │   
+        └── Venue/
+            ├── VenueDetailViewModelTests.swift
+            └── VenuesListViewModelTests.swift
+                 
 ```
 
 ## 🧪 Testing
@@ -212,14 +215,6 @@ To add a new language:
 1. In Xcode: Project → Info → Localizations → +
 2. Open `.xcstrings` files and add translations
 3. No code changes needed!
-
-## ♿ Accessibility
-
-The app supports:
-- VoiceOver (with proper labels and hints)
-- Dynamic Type
-- Reduced Motion
-- High Contrast
 
 ## 📱 Supported Devices
 
