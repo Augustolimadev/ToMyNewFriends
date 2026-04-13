@@ -5,11 +5,13 @@
 //  Created by Augusto Lima on 12/4/2026.
 //
 
-import XCTest
+import Testing
+import Foundation
 @testable import RedHotChiliDevs
 
+@Suite("Venue Detail ViewModel Tests")
 @MainActor
-final class VenueDetailViewModelTests: XCTestCase {
+struct VenueDetailViewModelTests {
 
     private let venue   = Venue(id: 3, name: "Cobblequill Colosseum", sortId: 1)
     private let artistA = Artist(id: 7, name: "Beat Illuminati",  genre: "Dance")
@@ -29,7 +31,8 @@ final class VenueDetailViewModelTests: XCTestCase {
     }
 
     // MARK: - Tests
-    func testLoadPerformancesSuccessPopulatesPerformances() async {
+    @Test("Load performances success populates performances")
+    func loadPerformancesSuccessPopulatesPerformances() async {
         
         let performances = makePerformances(relative: [2, 7, 12])
 
@@ -41,11 +44,12 @@ final class VenueDetailViewModelTests: XCTestCase {
 
         await viewModel.loadPerformances()
 
-        XCTAssertEqual(viewModel.performances.count, 3)
-        XCTAssertNil(viewModel.errorMessage)
+        #expect(viewModel.performances.count == 3)
+        #expect(viewModel.errorMessage == nil)
     }
 
-    func testLoadPerformancesSortedByDate() async {
+    @Test("Load performances sorted by date")
+    func loadPerformancesSortedByDate() async {
         
         let performances = makePerformances(relative: [12, 2, 7])
 
@@ -58,10 +62,11 @@ final class VenueDetailViewModelTests: XCTestCase {
         await viewModel.loadPerformances()
 
         let dates = viewModel.performances.map(\.date)
-        XCTAssertEqual(dates, dates.sorted())
+        #expect(dates == dates.sorted())
     }
 
-    func testLoadPerformancesNetworkFailureSetsErrorMessage() async {
+    @Test("Load performances network failure sets error message")
+    func loadPerformancesNetworkFailureSetsErrorMessage() async {
         
         let mock = MockNetworkService()
         mock.errorToThrow = .noData
@@ -71,11 +76,12 @@ final class VenueDetailViewModelTests: XCTestCase {
 
         await viewModel.loadPerformances()
 
-        XCTAssertTrue(viewModel.performances.isEmpty)
-        XCTAssertNotNil(viewModel.errorMessage)
+        #expect(viewModel.performances.isEmpty)
+        #expect(viewModel.errorMessage != nil)
     }
 
-    func testLoadPerformancesEmbedsArtistInfo() async {
+    @Test("Load performances embeds artist info")
+    func loadPerformancesEmbedsArtistInfo() async throws {
         
         let performances = makePerformances(relative: [1])
 
@@ -87,7 +93,7 @@ final class VenueDetailViewModelTests: XCTestCase {
 
         await viewModel.loadPerformances()
 
-        let first = try? XCTUnwrap(viewModel.performances.first)
-        XCTAssertEqual(first?.artist.name, "Beat Illuminati")
+        let first = try #require(viewModel.performances.first)
+        #expect(first.artist.name == "Beat Illuminati")
     }
 }

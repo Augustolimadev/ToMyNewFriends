@@ -5,11 +5,12 @@
 //  Created by Augusto Lima on 10/4/2026.
 //
 
-import XCTest
+import Testing
 @testable import RedHotChiliDevs
 
+@Suite("Venues List ViewModel Tests")
 @MainActor
-final class VenuesListViewModelTests: XCTestCase {
+struct VenuesListViewModelTests {
 
     private func makeVenues() -> [Venue] {
         [
@@ -20,7 +21,8 @@ final class VenuesListViewModelTests: XCTestCase {
     }
 
     // MARK: - Tests
-    func testLoadVenuesSuccessPopulatesVenues() async {
+    @Test("Load venues success populates venues")
+    func loadVenuesSuccessPopulatesVenues() async {
         
         let mock = MockNetworkService()
         mock.responses["/venues"] = makeVenues()
@@ -30,12 +32,13 @@ final class VenuesListViewModelTests: XCTestCase {
 
         await viewModel.loadVenues()
 
-        XCTAssertEqual(viewModel.venues.count, 3)
-        XCTAssertNil(viewModel.errorMessage)
-        XCTAssertFalse(viewModel.isLoading)
+        #expect(viewModel.venues.count == 3)
+        #expect(viewModel.errorMessage == nil)
+        #expect(viewModel.isLoading == false)
     }
 
-    func testLoadVenuesSortedBySortId() async {
+    @Test("Load venues sorted by sortId")
+    func loadVenuesSortedBySortId() async {
         
         // Provide unsorted input
         let unsorted = [
@@ -52,10 +55,11 @@ final class VenuesListViewModelTests: XCTestCase {
 
         await viewModel.loadVenues()
 
-        XCTAssertEqual(viewModel.venues.map(\.sortId), [1, 2, 3])
+        #expect(viewModel.venues.map(\.sortId) == [1, 2, 3])
     }
 
-    func testLoadVenuesNetworkFailureSetsErrorMessage() async {
+    @Test("Load venues network failure sets error message")
+    func loadVenuesNetworkFailureSetsErrorMessage() async {
         
         let mock = MockNetworkService()
         mock.errorToThrow = .invalidURL
@@ -65,12 +69,13 @@ final class VenuesListViewModelTests: XCTestCase {
 
         await viewModel.loadVenues()
 
-        XCTAssertTrue(viewModel.venues.isEmpty)
-        XCTAssertNotNil(viewModel.errorMessage)
-        XCTAssertFalse(viewModel.isLoading)
+        #expect(viewModel.venues.isEmpty)
+        #expect(viewModel.errorMessage != nil)
+        #expect(viewModel.isLoading == false)
     }
 
-    func testLoadVenuesCachingCallsNetworkOnce() async {
+    @Test("Load venues caching calls network once")
+    func loadVenuesCachingCallsNetworkOnce() async {
         
         let mock  = MockNetworkService()
         let cache = MockCacheService()
@@ -82,6 +87,6 @@ final class VenuesListViewModelTests: XCTestCase {
         await viewModel.loadVenues()
         await viewModel.loadVenues()
 
-        XCTAssertEqual(mock.requestedEndpoints.filter { $0 == "/venues" }.count, 1)
+        #expect(mock.requestedEndpoints.filter { $0 == "/venues" }.count == 1)
     }
 }

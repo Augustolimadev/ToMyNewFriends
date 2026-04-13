@@ -5,45 +5,53 @@
 //  Created by Augusto Lima on 10/4/2026.
 //
 
-import XCTest
+import Testing
+import Foundation
 @testable import RedHotChiliDevs
 
-final class APIEndpointTests: XCTestCase {
+@Suite("API Endpoint Tests")
+struct APIEndpointTests {
 
-    func testArtistsPath() {
-        XCTAssertEqual(APIEndpoint.artists.path, "/artists")
+    @Test("Artists path is correct")
+    func artistsPath() {
+        #expect(APIEndpoint.artists.path == "/artists")
     }
     
-    func testArtistPerformancesPath() {
-        XCTAssertEqual(APIEndpoint.artistPerformances(id: 7).path, "/artists/7/performances")
+    @Test("Artist performances path is correct")
+    func artistPerformancesPath() {
+        #expect(APIEndpoint.artistPerformances(id: 7).path == "/artists/7/performances")
     }
 
-    func testVenuesPath() {
-        XCTAssertEqual(APIEndpoint.venues.path, "/venues")
+    @Test("Venues path is correct")
+    func venuesPath() {
+        #expect(APIEndpoint.venues.path == "/venues")
     }
 
-    func testVenuePerformancesPath() {
-        XCTAssertEqual(APIEndpoint.venuePerformances(id: 3).path, "/venues/3/performances")
+    @Test("Venue performances path is correct")
+    func venuePerformancesPath() {
+        #expect(APIEndpoint.venuePerformances(id: 3).path == "/venues/3/performances")
     }
 
-    func testArtistPerformancesWithDateRangeBuildsCorrectURL() {
+    @Test("Artist performances with date range builds correct URL")
+    func artistPerformancesWithDateRangeBuildsCorrectURL() {
         
         var components = DateComponents()
         components.year = 2026; components.month = 4; components.day = 12
         let from = Calendar.current.date(from: components)!
 
-        components.day = 14
+        components.day = 25
         let to = Calendar.current.date(from: components)!
 
         let endpoint = APIEndpoint.artistPerformances(id: 7, from: from, to: to)
         let url = endpoint.url!
         let urlString = url.absoluteString
 
-        XCTAssertTrue(urlString.contains("from=2026-04-12"))
-        XCTAssertTrue(urlString.contains("to=2026-04-25"))
+        #expect(urlString.contains("from=2026-04-12"))
+        #expect(urlString.contains("to=2026-04-25"))
     }
 
-    func testVenuePerformancesWithFromOnlyOmitsToParam() {
+    @Test("Venue performances with from only omits to parameter")
+    func venuePerformancesWithFromOnlyOmitsToParam() {
         
         var components = DateComponents()
         components.year = 2026; components.month = 4; components.day = 12
@@ -53,11 +61,12 @@ final class APIEndpointTests: XCTestCase {
         let url = endpoint.url!
         let urlString = url.absoluteString
 
-        XCTAssertTrue(urlString.contains("from=2026-04-12"))
-        XCTAssertFalse(urlString.contains("to="))
+        #expect(urlString.contains("from=2026-04-12"))
+        #expect(!urlString.contains("to="))
     }
 
-    func testArtistsUrlHasCorrectBaseURL() {
-        XCTAssertEqual(APIEndpoint.artists.url?.host(), "mybaseapi.com")
+    @Test("Artists URL has correct base URL")
+    func artistsUrlHasCorrectBaseURL() {
+        #expect(APIEndpoint.artists.url?.host() == "api.leapmobileinterview.com")
     }
 }

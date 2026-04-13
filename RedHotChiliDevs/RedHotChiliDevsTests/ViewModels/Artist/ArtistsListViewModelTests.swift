@@ -5,11 +5,12 @@
 //  Created by Augusto Lima on 10/4/2026.
 //
 
-import XCTest
+import Testing
 @testable import RedHotChiliDevs
 
+@Suite("Artists List ViewModel Tests")
 @MainActor
-final class ArtistsListViewModelTests: XCTestCase {
+struct ArtistsListViewModelTests {
 
     // MARK: - Helpers
     private func makeArtists() -> [Artist] {
@@ -21,7 +22,8 @@ final class ArtistsListViewModelTests: XCTestCase {
     }
 
     // MARK: - Tests
-    func testLoadArtistsSuccessPopulatesArtists() async throws {
+    @Test("Load artists success populates artists")
+    func loadArtistsSuccessPopulatesArtists() async throws {
         
         let mock = MockNetworkService()
         mock.responses["/artists"] = makeArtists()
@@ -31,12 +33,13 @@ final class ArtistsListViewModelTests: XCTestCase {
 
         await viewModel.loadArtists()
 
-        XCTAssertEqual(viewModel.artists.count, 3)
-        XCTAssertNil(viewModel.errorMessage)
-        XCTAssertFalse(viewModel.isLoading)
+        #expect(viewModel.artists.count == 3)
+        #expect(viewModel.errorMessage == nil)
+        #expect(viewModel.isLoading == false)
     }
 
-    func testLoadArtistsSortedAlphabetically() async {
+    @Test("Load artists sorted alphabetically")
+    func loadArtistsSortedAlphabetically() async {
         
         let mock = MockNetworkService()
         mock.responses["/artists"] = makeArtists()
@@ -46,14 +49,15 @@ final class ArtistsListViewModelTests: XCTestCase {
 
         await viewModel.loadArtists()
 
-        XCTAssertEqual(viewModel.artists.map(\.name), [
+        #expect(viewModel.artists.map(\.name) == [
             "Beat Illuminati",
             "Diva Moon Rescue",
             "High Noon Saloon"
         ])
     }
 
-    func testLoadArtistsNetworkFailureSetsErrorMessage() async {
+    @Test("Load artists network failure sets error message")
+    func loadArtistsNetworkFailureSetsErrorMessage() async {
         
         let mock = MockNetworkService()
         mock.errorToThrow = .statusCode(500)
@@ -63,12 +67,13 @@ final class ArtistsListViewModelTests: XCTestCase {
 
         await viewModel.loadArtists()
 
-        XCTAssertTrue(viewModel.artists.isEmpty)
-        XCTAssertNotNil(viewModel.errorMessage)
-        XCTAssertFalse(viewModel.isLoading)
+        #expect(viewModel.artists.isEmpty)
+        #expect(viewModel.errorMessage != nil)
+        #expect(viewModel.isLoading == false)
     }
 
-    func testLoadArtistsReturnsCachedData() async {
+    @Test("Load artists returns cached data")
+    func loadArtistsReturnsCachedData() async {
         
         let mock  = MockNetworkService()
         let cache = MockCacheService()
@@ -81,10 +86,11 @@ final class ArtistsListViewModelTests: XCTestCase {
         await viewModel.loadArtists() // second call — should hit cache
 
         // Network should only have been called once
-        XCTAssertEqual(mock.requestedEndpoints.filter { $0 == "/artists" }.count, 1)
+        #expect(mock.requestedEndpoints.filter { $0 == "/artists" }.count == 1)
     }
 
-    func testLoadArtistsIsLoadingTransition() async {
+    @Test("Load artists isLoading transition")
+    func loadArtistsIsLoadingTransition() async {
         
         let mock = MockNetworkService()
         mock.responses["/artists"] = makeArtists()
@@ -92,8 +98,8 @@ final class ArtistsListViewModelTests: XCTestCase {
         let repo = ArtistRepository(networkService: mock, cacheService: MockCacheService())
         let viewModel  = ArtistsListViewModel(repository: repo)
 
-        XCTAssertFalse(viewModel.isLoading)
+        #expect(viewModel.isLoading == false)
         await viewModel.loadArtists()
-        XCTAssertFalse(viewModel.isLoading)
+        #expect(viewModel.isLoading == false)
     }
 }

@@ -42,9 +42,11 @@ final class VenueDetailViewModel {
         let twoWeeksLater = Calendar.current.date(byAdding: .day, value: 14, to: today)
 
         do {
-            performances = try await repository.fetchPerformances(for: venue.id,
-                                                                  from: today,
-                                                                  to: twoWeeksLater)
+            performances = try await repository.fetchPerformances(
+                for: venue.id,                                
+                from: today,
+                to: twoWeeksLater
+            )
         } catch {
             errorMessage = error.localizedDescription
         }

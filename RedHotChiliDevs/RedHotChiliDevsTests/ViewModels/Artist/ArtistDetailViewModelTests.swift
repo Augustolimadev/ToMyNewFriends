@@ -5,11 +5,13 @@
 //  Created by Augusto Lima on 12/4/2026.
 //
 
-import XCTest
+import Testing
+import Foundation
 @testable import RedHotChiliDevs
 
+@Suite("Artist Detail ViewModel Tests")
 @MainActor
-final class ArtistDetailViewModelTests: XCTestCase {
+struct ArtistDetailViewModelTests {
 
     private let artist = Artist(id: 7, name: "Beat Illuminati", genre: "Dance")
     private let venueA = Venue(id: 3, name: "Cobblequill Colosseum", sortId: 1)
@@ -30,7 +32,8 @@ final class ArtistDetailViewModelTests: XCTestCase {
     }
 
     // MARK: - Tests
-    func testLoadPerformancesSuccessPopulatesPerformances() async {
+    @Test("Load performances success populates performances")
+    func loadPerformancesSuccessPopulatesPerformances() async {
         
         let performances = makePerformances(relative: [1, 5, 10])
 
@@ -42,11 +45,12 @@ final class ArtistDetailViewModelTests: XCTestCase {
 
         await viewModel.loadPerformances()
 
-        XCTAssertEqual(viewModel.performances.count, 3)
-        XCTAssertNil(viewModel.errorMessage)
+        #expect(viewModel.performances.count == 3)
+        #expect(viewModel.errorMessage == nil)
     }
 
-    func testLoadPerformancesSortedByDate() async {
+    @Test("Load performances sorted by date")
+    func loadPerformancesSortedByDate() async {
         
         // Provide out-of-order dates
         let performances = makePerformances(relative: [10, 1, 5])
@@ -60,10 +64,11 @@ final class ArtistDetailViewModelTests: XCTestCase {
         await viewModel.loadPerformances()
 
         let dates = viewModel.performances.map(\.date)
-        XCTAssertEqual(dates, dates.sorted())
+        #expect(dates == dates.sorted())
     }
 
-    func testLoadPerformancesNetworkFailureSetsErrorMessage() async {
+    @Test("Load performances network failure sets error message")
+    func loadPerformancesNetworkFailureSetsErrorMessage() async {
         
         let mock = MockNetworkService()
         mock.errorToThrow = .statusCode(404)
@@ -73,11 +78,12 @@ final class ArtistDetailViewModelTests: XCTestCase {
 
         await viewModel.loadPerformances()
 
-        XCTAssertTrue(viewModel.performances.isEmpty)
-        XCTAssertNotNil(viewModel.errorMessage)
+        #expect(viewModel.performances.isEmpty)
+        #expect(viewModel.errorMessage != nil)
     }
 
-    func testLoadPerformancesEmpty_doesNotSetError() async {
+    @Test("Load performances empty does not set error")
+    func loadPerformancesEmpty_doesNotSetError() async {
         
         let mock = MockNetworkService()
         mock.responses["/artists/7/performances"] = [ArtistPerformance]()
@@ -87,11 +93,12 @@ final class ArtistDetailViewModelTests: XCTestCase {
 
         await viewModel.loadPerformances()
 
-        XCTAssertTrue(viewModel.performances.isEmpty)
-        XCTAssertNil(viewModel.errorMessage)
+        #expect(viewModel.performances.isEmpty)
+        #expect(viewModel.errorMessage == nil)
     }
 
-    func testLoadPerformancesUsesDateRangeQueryParams() async {
+    @Test("Load performances uses date range query params")
+    func loadPerformancesUsesDateRangeQueryParams() async {
         
         let mock = MockNetworkService()
         mock.responses["/artists/7/performances"] = [ArtistPerformance]()
@@ -102,6 +109,6 @@ final class ArtistDetailViewModelTests: XCTestCase {
         await viewModel.loadPerformances()
 
         // The path is the same regardless of query params — verify it was called
-        XCTAssertTrue(mock.requestedEndpoints.contains("/artists/7/performances"))
+        #expect(mock.requestedEndpoints.contains("/artists/7/performances"))
     }
 }

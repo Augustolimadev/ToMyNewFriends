@@ -45,6 +45,11 @@
 			path = RedHotChiliDevsUITests;
 			sourceTree = "<group>";
 		};
+		C5DDA7B52F8D46AD005E1ECB /* Docs */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Docs;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +80,7 @@
 		C513B3F62F8871F300B5A407 = {
 			isa = PBXGroup;
 			children = (
+				C5DDA7B52F8D46AD005E1ECB /* Docs */,
 				C513B4012F8871F300B5A407 /* RedHotChiliDevs */,
 				C513B40F2F8871F600B5A407 /* RedHotChiliDevsTests */,
 				C513B4192F8871F600B5A407 /* RedHotChiliDevsUITests */,
@@ -109,6 +115,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				C513B4012F8871F300B5A407 /* RedHotChiliDevs */,
+				C5DDA7B52F8D46AD005E1ECB /* Docs */,
 			);
 			name = RedHotChiliDevs;
 			packageProductDependencies = (

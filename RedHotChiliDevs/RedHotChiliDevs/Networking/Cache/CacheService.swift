@@ -12,6 +12,7 @@ final class CacheService: CacheServiceProtocol {
 
     // MARK: - Types
     private final class Entry: NSObject {
+        
         let data: Data
         let expiresAt: Date
 
