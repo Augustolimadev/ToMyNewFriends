@@ -62,16 +62,8 @@ struct VenuesListView: View {
     }
 
     private func errorView(message: String, viewModel: VenuesListViewModel) -> some View {
-        
-        ContentUnavailableView {
-            Label(Strings.Common.failedToLoad, systemImage: "exclamationmark.triangle")
-        } description: {
-            Text(message)
-        } actions: {
-            Button(Strings.Common.retry) {
-                Task { await viewModel.loadVenues() }
-            }
-            .buttonStyle(.borderedProminent)
+        ErrorStateView(message: message) {
+            await viewModel.loadVenues()
         }
     }
 }

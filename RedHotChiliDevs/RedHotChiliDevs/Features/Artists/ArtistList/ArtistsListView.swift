@@ -62,16 +62,8 @@ struct ArtistsListView: View {
     }
 
     private func errorView(message: String, viewModel: ArtistsListViewModel) -> some View {
-        
-        ContentUnavailableView {
-            Label(Strings.Common.failedToLoad, systemImage: "exclamationmark.triangle")
-        } description: {
-            Text(message)
-        } actions: {
-            Button(Strings.Common.retry) {
-                Task { await viewModel.loadArtists() }
-            }
-            .buttonStyle(.borderedProminent)
+        ErrorStateView(message: message) {
+            await viewModel.loadArtists()
         }
     }
 }
