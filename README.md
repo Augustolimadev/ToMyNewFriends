@@ -48,7 +48,7 @@ This project follows **Clean Architecture** principles with MVVM pattern:
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/RedHotChiliDevs.git
+git clone https://github.com/Augustolimadev/RedHotChiliDevs.git
 cd RedHotChiliDevs
 ```
 
